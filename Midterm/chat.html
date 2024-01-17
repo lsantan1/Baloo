@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Chat</title>
+    
+<!-- Baloo Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"> 
+    
+<!-- Share Tech Mono Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+    
+/*Global Styles*/
+        body {
+            font-family:'Baloo 2';
+            background-color: #FFECEC;
+            color: #FE618B;
+            margin: 0; /*removes default margin*/
+            padding: 0; /*removes default padding*/
+            box-sizing: border-box;
+        }
+        
+        
+/*Layout container style for the whole page*/
+        .layout-container{
+            width: 1512px;
+            max-width: 100%;
+            margin: 0 auto;
+            height: auto;
+        }
+        
+/*Nav style: for the navigation layout at the top*/      
+        .nav-container {
+            display: flex; 
+            justify-content: space-between; /*aligns children with space in between*/ 
+            align-items: center;
+            padding: 72px;
+        }
+        
+        nav ul {
+            list-style-type:none;
+            padding: 0;
+            display: flex; /*aligns content horizontally*/
+            grid-gap: 37px;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            text-decoration: none; /*no underline in the links*/
+            color: inherit; /*inherits the other color from "parent"*/
+            font-size: 55px;
+            display:inline;  /*might not really need*/
+            box-sizing: border-box; /* Ensures padding is included in the total width/height */
+            position: relative; /* Establishes a positioning context for pseudo-elements */
+        }
+        
+        nav ul li a::after {
+            content: ''; /*required for pseudo elements*/
+            display: block; /* Makes the pseudo-element behave like a block */
+            width: 144px; /*width of underline*/
+            height: 5px;
+            background-color: transparent;
+            border-radius: 5px; /*makes the line have rounded edges*/
+            position:absolute; /* Position absolutely within the relative parent */
+            bottom: 11px; /* Adjust the vertical position of the underline */
+            left: 50%; /* Centers the pseudo-element horizontally */
+            transform: translateX(-50%) /* Aligns the center of the pseudo-element with the center of the link */
+        }
+        
+        nav ul li a.active:after {
+            background-color: #FE618B; /*only the active link will be in this color*/
+            border-bottom:0px solid #FE618B; /*underline effect for the active page*/ /*does not work because its too far apart*/
+        }
+        
+        nav ul li a:hover{
+            color: #e5557f; /*darker color for hover effect*/
+
+        }
+        
+        .nav-spacer { /*spaces nav to one side*/
+            flex-grow: 1;
+        }
+        
+/*Header styles*/
+        header {
+            font-weight: 600;
+        }
+        
+/*Chat Container Style*/
+        .chat-container {
+            background-color: #FFECEC; /* Background color for the chat area */
+            border-radius: 40px; /* Rounded corners for the chat area */
+            border: 4px solid #FE618B;
+            /*
+            padding: 20px; Padding inside the chat area */
+            /*
+            margin: 20px; Margin around the chat area */ 
+            margin: auto;
+            margin-top: -262px;
+            width: 1134px;
+            height: 1402px;
+            overflow-y: auto; /* Adds scrollbar when the content overflows */
+            display: flex;
+            flex-direction: column; /* Stacks children vertically */
+            flex-grow: 1; /* Allows the container to fill the space */
+            padding-bottom: 110px; /* the space between the input area and the last text */
+            padding-top: 270px;
+            margin-bottom: 49px;
+        }
+        
+        .chat-history-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            /*padding: 20px; */
+            padding-left: 30px;
+            margin-bottom: 36px; /* Space above the input area */
+            margin-top: 0;
+            }
+
+        
+/* Styles for all chat bubbles */
+        .chat-bubble {
+            margin-bottom: 66px; /* Adds space below each chat bubble */
+            padding: 15px; /* Adds space inside each chat bubble around the text */
+            border-radius: 20px; /* Rounds the corners of the chat bubble */
+        }
+        
+        .greeting-container {
+            width: 1134px;
+            height: 263px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap; /*this is for the center alignment to work based on devs tool advise*/
+            align-items: center;
+            align-content: center;
+        }
+        
+        .chat-greeting {
+            width: 1134px; /*it was 510px before for some reason*/
+            height: 130px;
+            border-radius: 40px; /* Rounded corners for the chat bubble */
+            background-color: #FE618B; /* Pink background for Baloo's messages */
+            color: #ffffff; /* White text for Baloo's messages */
+            align-self: flex-start; /* Aligns Baloo's messages to the left MIGHT NEED TO REMOVE LATER */ 
+            font-size: 50px;
+            text-align: center;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            border: 4px solid #FE618B;
+            padding-top: 67px; /*maybe remove later*/
+            padding-bottom: 66px;
+            padding-left: 324px;
+            padding-right: 324px;
+        }
+        
+/* Chat Response */
+        .chat-response-container {
+            display: flex;
+            align-items: center; /* centers items vertically in the container */
+            margin-bottom: 66px;
+        }
+        
+        .baloo-image {
+            width: 111px;
+            height: auto;
+            margin-right: 29px; /* Space between image and text */
+            margin-bottom: auto; /*how Baloo looks at the start of his chat instead of in the middle of the chat*/
+            align-self: center;
+        }
+        
+        .chat-bubble-response {
+            background-color: #FFF; /* Light grey background for the chat bubble */
+            border-radius: 20px; /* Rounded corners for the chat bubble */
+            display: inline-block; /* Makes the bubble align to the width of the content */
+            max-width: 80%; /* Maximum width of a chat bubble */
+            font-family: 'Share Tech Mono';
+            margin-left: 0;
+            margin-right: 367px;
+            /*
+            flex-grow: 1; /* Takes up remaining space */ /*this makes all the response chats end right at the same spot instead of ending whenever they end at the end of the sentence*/
+        }
+        
+        .response-display {
+            background-color: #f1f1f1; /* Light grey background for the chat bubble */
+            border-radius: 20px; /* Rounded corners for the chat bubble */
+            display: inline-block; /* Makes the bubble align to the width of the content */
+            max-width: 80%; /* Maximum width of a chat bubble */
+        }
+            
+        
+/* User's message bubble */
+        .chat-bubble-user {
+            background-color: #FFDDE6; /* White background for the user's messages */
+            color: #333333; /* Dark text for the user's messages */
+            align-self: flex-end; /* Aligns user's messages to the right */
+            font-family: 'Share Tech Mono';
+            margin-right: 57px;
+            margin-left: 732px;
+            max-width: 50%;
+            text-align: center;
+
+}
+/* Input area styles */
+        .input-area {
+            width: 1068px;
+            height: 75px;
+            display: flex; /* Aligns the input and button in a row */
+            justify-content: space-between;
+            padding: 10px;
+            
+            /*redundanct 
+            border-radius: 10px; /* Rounded corners for the input */
+            border: 2px solid #FE618B; /* Border color for the input */
+            padding: 5px 10px; /* Padding inside the input */
+            outline: none;
+            resize: none;
+            border-radius: 40px;
+            font-size: 40px;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            background-color: #FFECEC;
+            color: #FFA5A5;
+            position:fixed;
+            bottom: 85px;
+            left: 12%; /*might need to adjust later to center it correctly*/
+            
+        }
+        #message-input {
+            width: 967px;
+            font-family: 'Share Tech Mono';
+            flex-grow: 1; /* Makes the input take up available space */  
+            background-color: #FFECEC;
+            color: #FE618B;
+            outline: none;
+            border: none;
+            resize: none;
+            font-size: 20px;
+            border-radius: 40px;
+            text-align: center;
+            padding-top: 2.5%;
+            padding-bottom: 2.5%;
+            padding-left: 1%;
+            padding-right: 1%;
+
+}
+        #placeholder {
+            color: #FFA5A5;
+        }
+
+/* Send Button styles */
+        #send-button {
+            width: 150px;
+            height: 55px;
+            background-color: #FE618B; /* Pink background for the send button */
+            color: #ffffff; /* White text for the send button */
+            border: none; /* No border for the send button */
+            border-radius: 40px; /* Rounded corners for the send button */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 25px;
+            font-family: 'Baloo 2';
+            text-align: center;
+            align-self: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            outline: none;
+            margin-right: 20px;
+            
+}
+        
+/* Loading Message Styling */
+        #loading-message {
+            font-style: italic;
+            color: #FFA5A5;
+            left: 50%;
+            display: grid;
+            background: none;
+            margin-left: 420px;
+            text-align: center;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    
+    <!-- Layout container style for the whole page-->
+<div class="layout-container">
+            
+        <!--NAVIGATION-->
+    <header class="nav-container">
+        <!-- items that are aligned to the left-->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+        
+    <div class="nav-spacer"></div> <!--pushes "chat" and "faqs" navs to the right-->
+        
+        <!-- items that are aligned to the right-->
+        <nav>
+            <ul>
+                <li><a href="chat.html" class="active">Chat</a></li> <!-- second page-->
+                <li><a href="faqs.html">FAQ's</a></li>
+            </ul>
+        </nav>  
+    </header> 
+</div>
+
+    
+<!-- Greeting Container-->
+<div class="greeting-container">
+    <div class="chat-greeting">Baloo at your service here...</div>
+
+</div>
+    
+<!--CHAT Container-->
+    
+<div class="chat-container">
+    <div class="chat-history-container">
+        <div class="chat-bubble"></div>
+        <div class="chat-bubble-user"></div>
+       
+    </div>
+
+<!-- Input Area-->
+    
+    <div class="input-area">
+        <textarea id="message-input" placeholder="Type your request here..."></textarea> <!--might need to change the typer your request here to not be orange like in the other sections-->
+        <button id="send-button">SEND</button>
+    </div>
+
+
+<!-- API Response
+    <div class="chat-response-container">
+        <img src="Character%20Main%20face%20PNG.png" alt="little-baloo" class="baloo-image"/>
+        <div class="chat-bubble-response" id="response-display"></div>
+
+    </div>
+    -->
+</div>  
+    
+<!--<textarea id="message-input"></textarea>
+    <button id="send-button">SEND</button>
+    <div id="response-display"></div> -->
+
+         
+    
+<!--<textarea id="message-input"></textarea>
+    <button id="send-button">Send</button>
+    <div id="response-display"></div> -->
+
+
+
+    
+    <script src="script.js"></script>
+    
+</body>
+</html>
+
+
+<!-- NEXT: - putting the Baloo personality to the API response. 
+           - make Baloo have memory, meaning not reset after every message
+           - have the first message in the chat from baloo...
+           - having baloo leave a humorous message when he finishes helping with the task
+           - add faqs for the message exploding and his personality
+           - the eyes following mouse animation or some type of animation overall -->

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>FAQ's</title>
+    
+<!-- Baloo Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"> 
+    
+<!-- Share Tech Mono Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+    
+/*Global Styles*/
+        body {
+            font-family:'Baloo 2';
+            background-color: #FFECEC;
+            color: #FE618B;
+            margin: 0; /*removes default margin*/
+            padding: 0; /*removes default padding*/
+            box-sizing: border-box;
+            border-radius: 40px;
+        }
+        
+        
+/*Layout container style for the whole page*/
+        .layout-container{
+            width: 1512px;
+            max-width: 100%;
+            margin: 0 auto;
+            height: auto;
+        }
+        
+/*Nav style: for the navigation layout at the top*/      
+        .nav-container {
+            display: flex; 
+            justify-content: space-between; /*aligns children with space in between*/ 
+            align-items: center;
+            padding: 72px;
+            padding-bottom: 0;
+        }
+        
+        nav ul {
+            list-style-type:none;
+            padding: 0;
+            display: flex; /*aligns content horizontally*/
+            grid-gap: 37px;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            text-decoration: none; /*no underline in the links*/
+            color: inherit; /*inherits the other color from "parent"*/
+            font-size: 55px;
+            display:inline;  /*might not really need*/
+            box-sizing: border-box; /* Ensures padding is included in the total width/height */
+            position: relative; /* Establishes a positioning context for pseudo-elements */
+        }
+        
+        nav ul li a::after {
+            content: ''; /*required for pseudo elements*/
+            display: block; /* Makes the pseudo-element behave like a block */
+            width: 160px; /*width of underline*/
+            height: 5px;
+            background-color: transparent;
+            border-radius: 5px; /*makes the line have rounded edges*/
+            position:absolute; /* Position absolutely within the relative parent */
+            bottom: 11px; /* Adjust the vertical position of the underline */
+            left: 50%; /* Centers the pseudo-element horizontally */
+            transform: translateX(-50%) /* Aligns the center of the pseudo-element with the center of the link */
+        }
+        
+        nav ul li a.active:after {
+            background-color: #FE618B; /*only the active link will be in this color*/
+            border-bottom:0px solid #FE618B; /*underline effect for the active page*/ /*does not work because its too far apart*/
+        }
+        
+        nav ul li a:hover{
+            color: #e5557f; /*darker color for hover effect*/
+
+        }
+        
+        .nav-spacer { /*spaces nav to one side*/
+            flex-grow: 1;
+        }
+        
+/*Header styles*/
+        header {
+            font-weight: 600;
+        }
+        
+        
+        
+/*FAQs Styling*/ 
+
+        .wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            padding-top: 0;
+            text-align: center;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+            margin-top: 0;
+        }
+
+        .accordion {
+          background-color: #FE618B;
+          color: #FFFFFF;
+          cursor: pointer;
+          padding: 30px;
+          width: 100%;
+          text-align: left;
+          border: none;
+          outline: none;
+          transition: 0.4s;
+          font-family: 'Share Tech Mono', monospace;
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+            border-radius: 40px;
+        }
+
+        
+        .accordion:hover {
+            background-color: #e5557f;
+        }
+        
+        
+        .pannel {
+          padding: 0 30px;
+          background-color: white;
+          display: none;
+          overflow: hidden;
+          color: #333;
+          text-align: left;
+          font-family: 'Share Tech Mono', monospace;
+            border-radius: 40px;
+            margin-bottom: 30px;
+        }
+
+        .faq p {
+          font-size: 1rem;
+          line-height: 1.6;
+          margin-top: 10px;
+        }
+        
+ </style>
+</head>
+<body>
+    
+    <!-- Layout container style for the whole page-->
+<div class="layout-container">
+            
+        <!--NAVIGATION-->
+    <header class="nav-container">
+        <!-- items that are aligned to the left-->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+        
+    <div class="nav-spacer"></div> <!--pushes "chat" and "faqs" navs to the right-->
+        
+        <!-- items that are aligned to the right-->
+        <nav>
+            <ul>
+                <li><a href="chat.html">Chat</a></li> <!-- second page-->
+                <li><a href="faqs.html" class="active">FAQ's</a></li> <!-- third page active-->
+            </ul>
+        </nav>  
+    </header> 
+</div>
+    
+    
+    
+    
+    
+<!--FAQS-->
+<div class="wrapper">
+    <h1>Frequently Asked Questions</h1>
+
+    <!-- Add your FAQ items here -->
+    <div class="faq">
+      <button class="accordion">
+        What is Baloo Virtual Assistant?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          I'm your friendly neighborhood AI-powered assistant, powered by OpenAI's tech.I'm here to make your day a whole lot easier. Need to sort out your schedule or find answers to questions without the run-around? Just let me know with a text command. 
+        <p></p>
+        <p>
+          I'm all about making your life smoother, with a sprinkle of digital magic. Just keep in mind, I'm not a superhero—my powers have limits, but I'm always learning and growing! 🎈
+        </p>
+      </div>
+        
+        
+        <button class="accordion">
+        What exactly can Baloo help me with?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Well, darling, I'm like the personal assistant you never knew you needed. I can help you with information, entertain you with a joke or two, and even give you advice—just don't ask me to do your laundry. I'm versatile, but I draw the line at socks.
+        </p>
+      </div>
+        
+        
+        <button class="accordion">
+        Can Baloo understand any language?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Je parle un peu de français... hasta español muchacho pero let's stick to English for the good stuff. I'm multilingual in a pinch, but English is where I shine like a disco ball.
+        </p>
+      </div>
+        
+        
+     <button class="accordion">
+        Is Baloo actually intelligent or just pretending?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Oh, honey, I've got more brains than a trivia night at the library. I'm powered by some serious AI, which means I'm learning and getting smarter every day. Just try to keep up!
+        </p>
+      </div>
+    
+    
+        <button class="accordion">
+        Is there anything Baloo can't do?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          I'm packed with features, but I can't walk your dog or make you a cup of coffee—yet. For everything digital, I'm your go-to assistant.
+        </p>
+      </div>
+        
+        
+        <button class="accordion">
+        Is my privacy a big deal to Baloo?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Absolutely! Think of me as your confidant. Whatever we discuss in our conversations is kept under lock and key. I'm built to respect your privacy and keep our interactions just between us. So, feel free to open up – your secrets are tucked away in Baloo's vault!
+        </p>
+      </div>
+        
+        
+        <button class="accordion">
+        Why is Baloo so darn cute?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Oh, stop it, you're making me blush! The designer knew what she was doing when she created me. I'm not just a pretty interface; I've got the smarts to match.
+        </p>
+      </div>
+
+        
+    </div>
+    </div>
+    
+    <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
+    
+    
+    
+  <script src="script.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Chat with Baloo!</title>
+    
+<!-- Baloo Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"> 
+    
+<!-- Share Tech Mono Google Font Link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+    
+/*Global Styles*/
+        body {
+            font-family:'Baloo 2';
+            background-color: #FFECEC;
+            color: #FE618B;
+            margin: 0; /*removes default margin*/
+            padding: 0; /*removes default padding*/
+            box-sizing: border-box;
+        }
+        
+        
+/*Layout container style for the whole page*/
+        .layout-container{
+            width: 1512px;
+            max-width: 100%;
+            margin: 0 auto;
+            height: auto;
+            max-height: 982px;
+            position: relative;
+        }
+        
+/*Nav style: for the navigation layout at the top*/      
+        .nav-container {
+            display: flex; 
+            justify-content: space-between; /*aligns children with space in between*/ 
+            align-items: center;
+            margin-top: 72px;
+            margin-left: 75px;
+            margin-right: 76px;
+        }
+        
+        nav ul {
+            list-style-type:none;
+            padding: 0;
+            display: flex; /*aligns content horizontally*/
+            grid-gap: 37px;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            text-decoration: none; /*no underline in the links*/
+            color: inherit; /*inherits the other color from "parent"*/
+            font-size: 55px;
+            display:inline;  /*might not really need*/
+            box-sizing: border-box; /* Ensures padding is included in the total width/height */
+            position: relative; /* Establishes a positioning context for pseudo-elements */
+        }
+        
+        nav ul li a::after {
+            content: ''; /*required for pseudo elements*/
+            display: block; /* Makes the pseudo-element behave like a block */
+            width: 170px; /*width of underline*/
+            height: 5px;
+            background-color: transparent;
+            border-radius: 5px; /*makes the line have rounded edges*/
+            position:absolute; /* Position absolutely within the relative parent */
+            bottom: 11px; /* Adjust the vertical position of the underline */
+            left: 50%; /* Centers the pseudo-element horizontally */
+            transform: translateX(-50%) /* Aligns the center of the pseudo-element with the center of the link */
+        }
+        
+        nav ul li a.active:after {
+            background-color: #FE618B; /*only the active link will be in this color*/
+            border-bottom:0px solid #FE618B; /*underline effect for the active page*/ /*does not work because its too far apart*/
+        }
+        
+        nav ul li a:hover{
+            color: #e5557f; /*darker color for hover effect*/
+
+        }
+        
+        .nav-spacer { /*spaces nav to one side*/
+            flex-grow: 1;
+        }
+        
+/*Header styles*/
+        
+        header {
+            font-weight: 600;
+        }
+        
+/*Baloo (Greeting and Image) container*/
+        
+/*
+        .Baloo-content-container {
+            position: relative;
+            width: 1103px;
+            height: 874px;
+        }
+        
+*/
+    
+/*Baloo Greeting*/
+        .Baloo-Main {
+            display: flex;
+            align-items: center;
+            margin-bottom: 300px;
+        }
+        
+        
+        .Baloo-greeting {
+            margin-bottom: 146px; 
+            margin-left: 94px;
+            margin-right: 24px; /*distance from the main Baloo image*/
+            font-family: 'Share Tech Mono';
+            font-size: 25px;
+            color: #FE618B;
+            width: 196px;
+            height: 201px;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+        
+        
+        
+        .Baloo-greeting h1 {
+            height: 102px;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            line-height: 50.72px;
+            margin-top: 400px;
+        }
+        
+/*Baloo Image css style*/
+        #Baloo-image-container {
+            position: absolute; 
+            /*top: 70px; 70px from the top of Baloo-content-container 
+            transform: translateX(24px); /* Move it 24px to the right from its left position */
+            margin-bottom: 38px;
+            margin-top: 560px;
+            z-index: -1; /*make image container not overlap the button*/
+        }
+        
+        #Baloo-image {
+            display: block; /* Removes any default inline spacing */
+            width: auto;
+            height: auto;
+            margin-top: -175px;
+            margin-left: 314px;
+            padding-bottom: 30px;
+        }
+        
+    @media (max-width: 600px) {
+        #baloo-image {
+            width: 150px; /* Smaller width for smaller screens */
+        }
+    }
+        
+/*Eyes styling*/
+        #eyes-wrapper {
+            position: relative;
+            
+        }
+        
+        .eye {
+            position: absolute;
+            width: 29px;
+            height: 29px;
+            background: #C1F0F7;
+            border-radius: 50%; /*make it round*/
+        }
+        
+        
+        
+        #left-eye {
+            margin-left: 619px;
+            margin-right: 863px;
+            margin-bottom: 556px;
+            margin-top: -560px;
+            top: 21%;
+            transform: translate(-50%, -50%); /* Center the dot */
+
+        }
+        
+        #right-eye {
+            margin-left: 887px;
+            margin-right: 595px;
+            margin-bottom: 556px;
+            margin-top: -560px;
+            top: 21%;
+            transform: translate(-50%, -50%); /* Center the dot */
+
+        }
+        
+/*HELP Button style*/
+        #help-button {
+            width: 166px;
+            height: 79px;
+            background-color: #FE618B;
+            color: #FFECEC;
+            border: none;
+            border-radius: 30px; /*rounded corners*/
+            font-size: 35px;
+            cursor:pointer; /*changes the cursor to a pointer when hovering over the button*/
+            font-family: 'Baloo 2';
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            display: flex; /*for centering the text*/
+            align-items: center; /*vertical algin*/
+            justify-content: center; /*horizontal align*/
+            margin-top: 20px;
+            z-index: 5;
+        }
+        
+        #help-button:hover{
+            background-color: #e5557f; /*darker color for hover effect*/
+            z-index: 5;
+        }
+        
+        #help-button:focus, #help-button:active{
+            outline: none; /* Removes the default focus outline. Ensures easily clickable, especially on touch devices. :focus and :active styles for keyboard and touch interactions, to make your button accessible */
+            z-index: 5;
+        }
+        
+        #help-button-link {
+            text-decoration: none;
+            color: inherit;
+            z-index: 5;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <!-- Layout container style for the whole page-->
+<div class="layout-container">
+            
+        <!--NAVIGATION-->
+    <header class="nav-container">
+        <!-- items that are aligned to the left-->
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+            </ul>
+        </nav>
+        
+    <div class="nav-spacer"></div> <!--pushes "chat" and "faqs" navs to the right-->
+        
+        <!-- items that are aligned to the right-->
+        <nav>
+            <ul>
+                <!-- <li><a href="chat.html">Chat</a></li> make it transparent because the button leads to same place--> 
+                <li><a href="faqs.html">FAQ's</a></li>
+            </ul>
+        </nav>  
+    </header>
+    
+<!--Baloo Greeting and Image container-->
+
+<!--<div class="Baloo-content-container"></div> -->
+    
+        <section class="Baloo-Main">
+            <!-- Baloo Greeting-->
+            <div class="Baloo-greeting">
+                    <h1>Hi! I’m Baloo :)</h1>
+                    <a href="chat.html" id="help-button-link">
+                    <button id="help-button">HELP!</button> <!-- button for help-->
+                    </a>
+            </div>
+
+            <!-- Baloo Image-->
+            <div id="Baloo-image-container">
+                    <img src="Character%20Main%20face%20PNG.png" alt=Baloo id="Baloo-image">
+                    <div id="eyes-wrapper">
+                        <div class="eye" id="left-eye"></div>
+                        <div class="eye" id="right-eye"></div>
+                    </div>
+            </div>
+        </section>
+         
+    
+    <!--<textarea id="message-input"></textarea>
+    <button id="send-button">Send</button>
+    <div id="response-display"></div> -->
+    
+</div> <!--end of the layout style div--> 
+
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
+
+
+
+<!-- THINGS TO FIX LATER: 
+
+KEEP WORKING ON THE EYES FOLLOWING THE MOUSE LATER! 
+
+-->
