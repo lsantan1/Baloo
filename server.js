@@ -42,7 +42,14 @@ app.post('/chat', async (req, res) => {
 });
 //for sending requests to the API 
 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000/');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+  console.log(`Server running on port ${PORT}`);
 });
+
+
+// this is for local port, since I'm using Heroku, it needs to match the PORT that Heroku provides
+//app.listen(3000, () => {
+//    console.log('Server running on http://localhost:3000/');
+//});
 
